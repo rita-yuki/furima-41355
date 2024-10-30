@@ -46,17 +46,17 @@ Things you may want to cover:
 
 ## items テーブル
 
-| Column                     | Type       | Options                         |
-| -------------------------- | ---------- | ------------------------------- |
-| user                       | references | null: false , foreign_key: true | 
-| title                      | string     | null: false                     |
-| description                | text       | null: false                     |
-| category_id                | integer    | null: false                     |
-| product_status_id          | integer    | null: false                     |
-| shipping_fee_id            | integer    | null: false                     |
-| regional_original_delivery | string     | null: false                     |
-| days_up_to_delivery        | string     | null: false                     |
-| price                      | integer    | null: false                     |
+| Column                 | Type       | Options                         |
+| ---------------------- | ---------- | ------------------------------- |
+| user                   | references | null: false , foreign_key: true | 
+| title                  | string     | null: false                     |
+| description            | text       | null: false                     |
+| category_id            | integer    | null: false                     |
+| product_status_id      | integer    | null: false                     |
+| shipping_fee_id        | integer    | null: false                     |
+| prefecture_id          | integer    | null: false                     |
+| days_up_to_delivery_id | integer    | null: false                     |
+| price                  | integer    | null: false                     |
 
 ### Association
 - belongs_to :user
