@@ -27,7 +27,7 @@ RSpec.describe User, type: :model do
     it '重複したemailが存在する場合は登録できない' do
       @user.save
       another_user = FactoryBot.build(:user, email: @user.email, password: 'bbb111', password_confirmation: 'bbb111',
-                              family_name: '佐藤', name: '次郎', kana_family_name: 'サトウ', kana_name: 'ジロウ', birthday: '1990-01-01')
+                                             family_name: '佐藤', name: '次郎', kana_family_name: 'サトウ', kana_name: 'ジロウ', birthday: '1990-01-01')
       another_user.valid?
       expect(another_user.errors.full_messages).to include('Email has already been taken')
     end
@@ -92,7 +92,7 @@ RSpec.describe User, type: :model do
 
     it 'nameが全角でないと登録できない' do
       @user.name = 'hanako'
-     @user.valid?
+      @user.valid?
       expect(@user.errors.full_messages).to include('Name 全角文字を使用してください')
     end
 
