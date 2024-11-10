@@ -115,7 +115,7 @@ RSpec.describe User, type: :model do
     end
 
     it 'kana_nameが全角カタカナでないと登録できない' do
-      @user.kana_name = 'ハナコ'
+      @user.kana_name = 'ﾊﾅｺ'
       @user.valid?
       expect(@user.errors.full_messages).to include('Kana name 全角カタカナを使用してください')
     end
