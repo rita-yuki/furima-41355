@@ -1,11 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe 'ユーザー新規登録' do
-    before do
-      @user = FactoryBot.build(:user)
-    end
+  before do
+    @user = FactoryBot.build(:user)
+  end
 
+  describe 'ユーザー新規登録' do
+    context '新規登録できるとき' do
+      it '全ての項目が正しく入力されていれば登録できる' do
+        expect(@user).to be_valid
+      end
+    end
+    context '新規登録できないとき' do
     it 'nicknameが空では登録できない' do
       @user.nickname = ''
       @user.valid?
@@ -26,8 +32,8 @@ RSpec.describe User, type: :model do
 
     it '重複したemailが存在する場合は登録できない' do
       @user.save
-      another_user = FactoryBot.build(:user, email: @user.email, password: 'bbb111', password_confirmation: 'bbb111',
-                                             family_name: '佐藤', name: '次郎', kana_family_name: 'サトウ', kana_name: 'ジロウ', birthday: '1990-01-01')
+      another_user = FactoryBot.build(:user)
+      another_user.email = @user.email
       another_user.valid?
       expect(another_user.errors.full_messages).to include('Email has already been taken')
     end
@@ -125,5 +131,6 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Birthday can't be blank")
     end
+   end
   end
 end
