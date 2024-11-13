@@ -7,15 +7,20 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
+    @categories = Category.all
+    @product_statuses = ProductStatus.all 
+    @shipping_fees = ShippingFee.all
+    @prefectures = Prefecture.all
+    @days_up_to_deliveries = DaysUpToDelivery.all
   end
 
   def create
     @item = Item.new(item_params)
     @item.user = current_user
     if @item.save
-      redirect_to '/'
+      redirect_to root_path
     else
-      render 'new'
+      render :new,status: :unprocessable_entity
     end
   end
 
