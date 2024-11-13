@@ -10,6 +10,6 @@ class Item < ApplicationRecord
   validates :prefecture_id, presence: true
   validates :days_up_to_delivery_id, presence: true
   validates :price, presence: true, numericality: { greater_than: 0 }
+  validates :image, presence: { message: 'を添付してください' }
 end
  
-end
