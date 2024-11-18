@@ -97,11 +97,11 @@
           </div>
           <div class="price-content">
             <span>販売手数料 (10%)</span>
-            <span><span id='add-tax-price'></span>円</span>
+            <span><span id='add-tax-price'><%= @item.price.present? ? (@item.price * 0.1).to_i : '' %></span>円</span>
           </div>
           <div class="price-content">
             <span>販売利益</span>
-            <span><span id='profit'></span>円</span>
+            <span><span id='profit'><%= @item.price.present? ? (@item.price - (@item.price * 0.1).to_i) : '' %></span>円</span>
           </div>
         </div>
       </div>
