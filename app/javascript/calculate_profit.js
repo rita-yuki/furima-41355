@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('turbo:load', () => {
   const priceInput = document.getElementById('item-price');
   const taxDisplay = document.getElementById('add-tax-price');
   const profitDisplay = document.getElementById('profit');
@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('priceInput:', priceInput);
   console.log('taxDisplay:', taxDisplay);
   console.log('profitDisplay:', profitDisplay);
-  
+
   if (priceInput) {
     priceInput.addEventListener('input', () => {
       const price = parseInt(priceInput.value, 10);
