@@ -7,6 +7,8 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
+    @product_statuses = ProductStatus.all
+    @days_up_to_deliveries = DaysUpToDelivery.all
     set_form_data
   end
 
