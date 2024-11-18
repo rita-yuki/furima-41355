@@ -6,7 +6,7 @@ window.addEventListener('turbo:load', () => {
   console.log('priceInput:', priceInput);
   console.log('taxDisplay:', taxDisplay);
   console.log('profitDisplay:', profitDisplay);
-
+  
   if (priceInput) {
     priceInput.addEventListener('input', () => {
       const price = parseInt(priceInput.value, 10);
@@ -24,3 +24,4 @@ window.addEventListener('turbo:load', () => {
     });
   }
 });
+
