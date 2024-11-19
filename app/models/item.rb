@@ -13,8 +13,8 @@ class Item < ApplicationRecord
   validates :category_id, :product_status_id, :shipping_fee_id, :prefecture_id, :days_up_to_delivery_id,
             numericality: { other_than: 0, message: "can't be blank" }
   validates :price, presence: true, format: { with: /\A[0-9]+\z/ }
-  validates :price, numericality: { 
-    only_integer: true, 
+  validates :price, numericality: {
+    only_integer: true,
     greater_than_or_equal_to: 300,
     less_than_or_equal_to: 9_999_999
   }

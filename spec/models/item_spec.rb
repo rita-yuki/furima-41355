@@ -82,7 +82,7 @@ RSpec.describe Item, type: :model do
       it 'imageが添付されていないと出品できない' do
         @item.image = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Image を添付してください")
+        expect(@item.errors.full_messages).to include('Image を添付してください')
       end
     end
   end
