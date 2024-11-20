@@ -1,1 +1,0 @@
-class Genre < ActiveHash::Base
