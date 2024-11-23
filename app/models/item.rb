@@ -3,7 +3,7 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   def sold_out?
-    purchase.present?
+    # purchase.present?
   end
 
   extend ActiveHash::Associations::ActiveRecordExtensions
