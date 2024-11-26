@@ -33,15 +33,13 @@ class ItemsController < ApplicationController
   end
 
   def update
-    if params[:item][:image].blank? 
-      params[:item].delete(:image)
-    end
+    params[:item].delete(:image) if params[:item][:image].blank?
 
     if @item.update(item_params)
-     redirect_to item_path(@item.id)
+      redirect_to item_path(@item.id)
     else
-     set_form_data
-     render :edit, status: :unprocessable_entity
+      set_form_data
+      render :edit, status: :unprocessable_entity
     end
   end
 
