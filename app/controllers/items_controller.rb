@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update]
-  before_action :set_item, only: [:edit, :update]
+  before_action :set_item, only: [:show, :edit, :update]
   before_action :redirect_if_not_seller, only: [:edit, :update]
   before_action :redirect_if_sold, only: [:edit, :update]
 
@@ -25,7 +25,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
+    set_form_data
   end
 
   def edit
