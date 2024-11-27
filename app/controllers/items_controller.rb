@@ -1,5 +1,8 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :set_item, only: [:show, :edit, :update]
+  before_action :redirect_if_not_seller, only: [:edit, :update]
+  before_action :redirect_if_sold, only: [:edit, :update]
 
   def index
     @items = Item.order(created_at: :desc)
@@ -14,7 +17,7 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
     @item.user = current_user
     if @item.save
-      redirect_to root_path
+      redirect_to item_path(@item.id)
     else
       set_form_data
       render :new, status: :unprocessable_entity
@@ -22,7 +25,22 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
+    set_form_data
+  end
+
+  def edit
+    set_form_data
+  end
+
+  def update
+    params[:item].delete(:image) if params[:item][:image].blank?
+
+    if @item.update(item_params)
+      redirect_to item_path(@item.id)
+    else
+      set_form_data
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   private
@@ -38,5 +56,17 @@ class ItemsController < ApplicationController
     @shipping_fees = ShippingFee.all
     @prefectures = Prefecture.all
     @days_up_to_deliveries = DaysUpToDelivery.all
+  end
+
+  def set_item
+    @item = Item.find(params[:id])
+  end
+
+  def redirect_if_not_seller
+    redirect_to root_path unless current_user == @item.user
+  end
+
+  def redirect_if_sold
+    redirect_to root_path if @item.sold_out?
   end
 end
