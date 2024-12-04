@@ -25,7 +25,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    set_form_data
+    @item = Item.find(params[:id])
   end
 
   def edit
