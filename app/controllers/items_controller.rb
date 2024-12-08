@@ -25,7 +25,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    set_form_data
+    @item = Item.find(params[:id])
   end
 
   def edit
@@ -44,10 +44,8 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    if current_user == @item.user
-      @item.destroy
-    end
-      redirect_to root_path
+    @item.destroy if current_user == @item.user
+    redirect_to root_path
   end
 
   private
