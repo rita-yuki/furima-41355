@@ -13,12 +13,6 @@ class OrdersController < ApplicationController
     @order_address = OrderAddress.new(order_params)
     if @order_address.valid?
       pay_item
-      Payjp.api_key = 'sk_test_b572c80761b22c3659f971e7'
-      Payjp::Charge.create(
-        amount: @item.price,
-        card: order_params[:token],
-        currency: 'jpy'
-      )
       @order_address.save
       redirect_to root_path
     else
@@ -45,13 +39,13 @@ class OrdersController < ApplicationController
       user_id: current_user.id, item_id: @item.id, token: params[:token]
     )
   end
-end
 
-def pay_item
-  Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-  Payjp::Charge.create(
-    amount: order_params[:price],  
-    card: order_params[:token],   
-    currency: 'jpy'                 
-  )
+  def pay_item
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp::Charge.create(
+      amount: @item.price,  
+      card: order_params[:token],   
+      currency: 'jpy'                 
+    )
+  end
 end
