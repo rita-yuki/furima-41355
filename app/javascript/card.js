@@ -13,9 +13,15 @@ const pay = () => {
   const form = document.getElementById('charge-form');
   form.addEventListener("submit", (e) => {
     e.preventDefault();
+
+    const errorElement = document.getElementById('card-errors');
+    errorElement.textContent = '';
+
     payjp.createToken(numberElement).then(function (response) {
       if (response.error) {
-        console.error(response.error.message);
+        errorElement.textContent = response.error.message;
+        console.error('Error creating token: ', response.error.message);
+        form.submit();
       } else {
         const token = response.id;
         const renderDom = document.getElementById("charge-form");
@@ -29,6 +35,9 @@ const pay = () => {
 
         form.submit();
       }
+    }).catch(function (error) {
+      console.error('Unexpected error: ', error);
+      form.submit();
     });
   });
 };
