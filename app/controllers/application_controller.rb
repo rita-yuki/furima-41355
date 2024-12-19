@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
 
   def set_gon
     gon.some_variable = "some_value"  # 必要なデータをセットします
+    gon.public_key = ENV['PAYJP_PUBLIC_KEY']  # 必要なデータをセットします
   end
 
   protected
